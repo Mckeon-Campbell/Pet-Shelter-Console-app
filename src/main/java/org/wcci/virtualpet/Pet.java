@@ -8,32 +8,30 @@ import java.util.Map;
 public class Pet {
 
     private static final int TRAINENERGYLOSS = 10;
-    private static final int OVERFEDLEVEL = 90;
+    private static final int OVERFEDLEVEL = 100;
 
     private static final int HOURLYENERGY = 5;
 
     private static final int DEHYDRATIONLEVEL = 10;
 
-    private static final int HUNGRYLEVEL = 80;
+    private static final int HUNGRYLEVEL = 70;
 
     private static final int LONGHUNGER = 50;
 
-    private static final int SHORTLUNGER = 16;
+    private static final int SHORTLUNGER = 10;
     private static final int STARVINGLEVEL = 30;
 
     private static final int TIREDLEVEL = 25;
 
-    private static final int THIRSTLEVEL = 70;
+    private static final int THIRSTLEVEL = 80;
     public String petName;
     public int hunger;
     public int thirst;
     public int petAge;
     private Map<String, Integer> trainLevel = new HashMap<>();
-    private int dehydration;
     public double isSitting;
     public int energy;
     private List<Integer> feedingSchedule = new ArrayList<>();
-    
 
     public Pet(String name) {
 
@@ -77,7 +75,9 @@ public class Pet {
     }
 
     public boolean isHungry() {
-        if (this.hunger <= HUNGRYLEVEL) {
+        if (petAge <= 0) {
+            return true;
+        } else if (this.hunger <= HUNGRYLEVEL) {
             return true;
         }
         return false;
@@ -125,19 +125,27 @@ public class Pet {
     }
 
     public boolean isOverfed() {
-        if (this.hunger >= OVERFEDLEVEL) {
+        if (this.hunger > OVERFEDLEVEL) {
             return true;
         }
         return false;
     }
 
     public void commandSit() {
-        if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1) {
-            this.isSitting = 0.85;
-        } else {
+        if(petAge<1){
+            this.isSitting=0.5;
+        }
+
+        if (this.hunger <= HUNGRYLEVEL) {
             this.isSitting = 0.5;
         }
 
+        else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 2) {
+            this.isSitting = 0.85;
+        }
+        else {
+            this.isSitting = 0.5;
+        }
     }
 
     public void train(String string) {
@@ -167,10 +175,11 @@ public class Pet {
     }
 
     public void feed(int i) {
+        this.hunger += 30;
     }
 
     public boolean isDehydrated() {
-        if (this.dehydration <= DEHYDRATIONLEVEL) {
+        if (this.thirst <= DEHYDRATIONLEVEL) {
             return true;
         }
         return false;

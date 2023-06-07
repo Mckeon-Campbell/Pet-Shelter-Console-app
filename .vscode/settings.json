@@ -1,4 +1,16 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "cSpell.words": [
+        "DEHYDRATIONLEVEL",
+        "HOURLYENERGY",
+        "HUNGRYLEVEL",
+        "LONGHUNGER",
+        "OVERFEDLEVEL",
+        "SHORTLUNGER",
+        "STARVINGLEVEL",
+        "THIRSTLEVEL",
+        "TIREDLEVEL",
+        "TRAINENERGYLOSS"
+    ]
 }

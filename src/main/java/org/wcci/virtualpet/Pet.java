@@ -7,24 +7,42 @@ import java.util.Map;
 
 public class Pet {
 
+    private static final int TRAINENERGYLOSS = 10;
+    private static final int OVERFEDLEVEL = 90;
+
+    private static final int HOURLYENERGY = 5;
+
+    private static final int DEHYDRATIONLEVEL = 10;
+
+    private static final int HUNGRYLEVEL = 80;
+
+    private static final int LONGHUNGER = 30;
+
+    private static final int SHORTLUNGER = 16;
+    private static final int STARVINGLEVEL = 25;
+
+    private static final int TIREDLEVEL = 25;
+
+    private static final int THIRSTLEVEL = 70;
     public String petName;
     public int hunger;
     public int thirst;
     public int petAge;
     private Map<String, Integer> trainLevel = new HashMap<>();
     private int dehydration;
-    public boolean isSitting;
+    public double isSitting;
     public int energy;
     private List<Integer> feedingSchedule = new ArrayList<>();
+    
 
     public Pet(String name) {
 
         this.petName = name;
         this.petAge = 0;
-        this.thirst = 1;
-        this.isSitting = false;
+        this.thirst = 80;
+        this.isSitting = 0;
         this.energy = 40;
-        this.hunger = 90;
+        this.hunger = 80;
     }
 
     /** Hunger is on a scale from 0 to 100 */ // This is a "javadoc"
@@ -40,17 +58,17 @@ public class Pet {
         if (feedingSchedule.isEmpty()) {
 
             if (hours <= 8) {
-                this.hunger -= 16;
+                this.hunger -= SHORTLUNGER;
 
             } else if (hours >= 9)
-                this.hunger -= 30;
+                this.hunger -= LONGHUNGER;
 
         }
 
     }
 
     public void hourPassed() {
-        this.energy -= 5;
+        this.energy -= HOURLYENERGY;
     }
 
     /** Thirst is on a scale from 0 to 100 */
@@ -59,14 +77,14 @@ public class Pet {
     }
 
     public boolean isHungry() {
-        if (this.hunger == 40) {
+        if (this.hunger <= HUNGRYLEVEL) {
             return true;
         }
         return false;
     }
 
     public boolean isStarving() {
-        if (this.hunger == 25) {
+        if (this.hunger <= STARVINGLEVEL) {
             return true;
         }
         return false;
@@ -107,35 +125,41 @@ public class Pet {
     }
 
     public boolean isOverfed() {
-        if (this.hunger == 3) {
+        if (this.hunger >= OVERFEDLEVEL) {
             return true;
         }
         return false;
     }
 
     public void commandSit() {
+        if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1) {
+            this.isSitting = 0.85;
+        } else {
+            this.isSitting = 0.5;
+        }
 
     }
 
     public void train(String string) {
-        if (this.hunger <= 25) {
+        if (this.hunger >= STARVINGLEVEL) {
 
             if (trainLevel.containsKey(string)) {
                 trainLevel.put(string, (trainLevel.get(string) + 1));
             } else {
                 trainLevel.put(string, 1);
             }
-            this.thirst++;
-            this.energy -= 10;
+
         }
+        adjustThirst(-20);
+        this.energy -= TRAINENERGYLOSS;
+    }
+
+    private void adjustThirst(int i) {
+        thirst += i;
     }
 
     public double chanceOfSitting() {
-        if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 2) {
-            return 0.85;
-        } else {
-            return 0.5;
-        }
+        return isSitting;
     }
 
     public void setAgeMonths(int i) {
@@ -146,7 +170,7 @@ public class Pet {
     }
 
     public boolean isDehydrated() {
-        if (this.dehydration == 3) {
+        if (this.dehydration <= DEHYDRATIONLEVEL) {
             return true;
         }
         return false;
@@ -157,7 +181,7 @@ public class Pet {
     }
 
     public boolean isThirsty() {
-        if (this.thirst == 1) {
+        if (this.thirst <= THIRSTLEVEL) {
             return true;
         } else {
             return false;
@@ -165,7 +189,7 @@ public class Pet {
     }
 
     public void water(int i) {
-        thirst -= i;
+        adjustThirst(+10);
     }
 
     public Integer ageInYears() {
@@ -202,7 +226,7 @@ public class Pet {
     }
 
     public boolean isTired() {
-        if (energy < 25) {
+        if (energy < TIREDLEVEL) {
             return true;
         } else
             return false;

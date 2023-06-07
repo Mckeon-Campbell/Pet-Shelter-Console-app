@@ -12,20 +12,20 @@ public class Pet {
     /**
      *
      */
-    private static final int FEEDADD = 20;
+    private static final int FEEDADD = 10;
     private static final int TRAINENERGYLOSS = 10;
-    private static final int OVERFEDLEVEL = 110;
+    private static final int OVERFEDLEVEL = 70;
 
     private static final int HOURLYENERGY = 5;
 
     private static final int DEHYDRATIONLEVEL = 10;
 
-    private static final int HUNGRYLEVEL = 65;
+    private static final int HUNGRYLEVEL = 55;
 
-    private static final int LONGHUNGER = 50;
+    private static final int LONGHUNGER = 20;
 
-    private static final int SHORTLUNGER = 10;
-    private static final int STARVINGLEVEL = 30;
+    private static final int SHORTLUNGER = 5;
+    private static final int STARVINGLEVEL = 40;
 
     private static final int TIREDLEVEL = 25;
 
@@ -46,7 +46,7 @@ public class Pet {
         this.thirst = 80;
         this.isSitting = 0;
         this.energy = 40;
-        this.hunger = 60;
+        this.hunger = 50;
     }
 
     /** Hunger is on a scale from 0 to 100 */ // This is a "javadoc"
@@ -88,7 +88,7 @@ public class Pet {
 
     public boolean isHungry() {
 
-        if (this.hunger <= HUNGRYLEVEL) {
+        if (this.hunger < HUNGRYLEVEL) {
             return true;
         }
         return false;
@@ -151,7 +151,7 @@ public class Pet {
                 this.isSitting = 0.5;
             }
         } else {
-            if (this.thirst < THIRSTLEVEL) {
+            if (this.hunger < HUNGRYLEVEL) {
                 this.isSitting = 0.5;
             }
             else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1) {

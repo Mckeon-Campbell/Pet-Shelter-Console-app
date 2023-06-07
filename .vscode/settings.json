@@ -2,7 +2,9 @@
     "java.configuration.updateBuildConfiguration": "interactive",
     "java.debug.settings.onBuildFailureProceed": true,
     "cSpell.words": [
+        "adjusthunger",
         "DEHYDRATIONLEVEL",
+        "FEEDADD",
         "HOURLYENERGY",
         "HUNGRYLEVEL",
         "LONGHUNGER",

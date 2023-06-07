@@ -5,16 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ch.qos.logback.core.joran.conditional.ElseAction;
+
 public class Pet {
 
+    /**
+     *
+     */
+    private static final int FEEDADD = 20;
     private static final int TRAINENERGYLOSS = 10;
-    private static final int OVERFEDLEVEL = 100;
+    private static final int OVERFEDLEVEL = 110;
 
     private static final int HOURLYENERGY = 5;
 
     private static final int DEHYDRATIONLEVEL = 10;
 
-    private static final int HUNGRYLEVEL = 70;
+    private static final int HUNGRYLEVEL = 65;
 
     private static final int LONGHUNGER = 50;
 
@@ -40,7 +46,7 @@ public class Pet {
         this.thirst = 80;
         this.isSitting = 0;
         this.energy = 40;
-        this.hunger = 80;
+        this.hunger = 60;
     }
 
     /** Hunger is on a scale from 0 to 100 */ // This is a "javadoc"
@@ -56,13 +62,19 @@ public class Pet {
         if (feedingSchedule.isEmpty()) {
 
             if (hours <= 8) {
-                this.hunger -= SHORTLUNGER;
+                adjusthunger(-SHORTLUNGER);
 
             } else if (hours >= 9)
-                this.hunger -= LONGHUNGER;
+                adjusthunger(-LONGHUNGER);
 
         }
 
+    }
+
+    private void adjusthunger(int i) {
+        this.hunger+=i;
+        if(this.hunger<0)
+        this.hunger=0;
     }
 
     public void hourPassed() {
@@ -75,9 +87,8 @@ public class Pet {
     }
 
     public boolean isHungry() {
-        if (petAge <= 0) {
-            return true;
-        } else if (this.hunger <= HUNGRYLEVEL) {
+
+        if (this.hunger <= HUNGRYLEVEL) {
             return true;
         }
         return false;
@@ -132,25 +143,31 @@ public class Pet {
     }
 
     public void commandSit() {
+        if (petAge < 1) {
+            if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") > 1) {
+                this.isSitting = 0.85;
 
-        if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") > 1)  {
-            this.isSitting = 0.85;
-        }
-        else if(petAge<1)  {
-            this.isSitting= 0.5;
-        }
-
-        else if (this.hunger <= HUNGRYLEVEL) {
-            this.isSitting = 0.5;
-        }
-
-        //else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1)  {
-          //  this.isSitting = 0.85;
-        
-        else {
-            this.isSitting = 0.5;
+            } else {
+                this.isSitting = 0.5;
+            }
+        } else {
+            if (this.thirst < THIRSTLEVEL) {
+                this.isSitting = 0.5;
+            }
+            else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1) {
+                this.isSitting = 0.85;
+            } else {
+                this.isSitting = 0.5;
+            }
         }
     }
+
+    // else if (this.hunger <= HUNGRYLEVEL) {
+    // this.isSitting = 0.5;
+
+    // else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1)
+    // {
+    // this.isSitting = 0.85;
 
     public void train(String string) {
         if (this.hunger >= STARVINGLEVEL) {
@@ -179,7 +196,7 @@ public class Pet {
     }
 
     public void feed(int i) {
-        this.hunger += 30;
+        adjusthunger(FEEDADD);
     }
 
     public boolean isDehydrated() {

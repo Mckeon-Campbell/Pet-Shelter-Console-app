@@ -132,17 +132,21 @@ public class Pet {
     }
 
     public void commandSit() {
-        if(petAge<1){
-            this.isSitting=0.5;
+
+        if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") > 1)  {
+            this.isSitting = 0.85;
+        }
+        else if(petAge<1)  {
+            this.isSitting= 0.5;
         }
 
-        if (this.hunger <= HUNGRYLEVEL) {
+        else if (this.hunger <= HUNGRYLEVEL) {
             this.isSitting = 0.5;
         }
 
-        else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 2) {
-            this.isSitting = 0.85;
-        }
+        //else if (trainLevel.containsKey("sitting") && trainLevel.get("sitting") >= 1)  {
+          //  this.isSitting = 0.85;
+        
         else {
             this.isSitting = 0.5;
         }

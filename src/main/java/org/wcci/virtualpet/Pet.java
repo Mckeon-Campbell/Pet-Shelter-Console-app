@@ -16,10 +16,10 @@ public class Pet {
 
     private static final int HUNGRYLEVEL = 80;
 
-    private static final int LONGHUNGER = 30;
+    private static final int LONGHUNGER = 50;
 
     private static final int SHORTLUNGER = 16;
-    private static final int STARVINGLEVEL = 25;
+    private static final int STARVINGLEVEL = 30;
 
     private static final int TIREDLEVEL = 25;
 

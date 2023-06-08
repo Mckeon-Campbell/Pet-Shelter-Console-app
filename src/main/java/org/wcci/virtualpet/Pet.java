@@ -12,19 +12,19 @@ public class Pet {
     /**
      *
      */
-    private static final int FEEDADD = 10;
+    private static final int FEEDADD = 20;
     private static final int TRAINENERGYLOSS = 10;
-    private static final int OVERFEDLEVEL = 70;
+    private static final int OVERFEDLEVEL = 90;
 
     private static final int HOURLYENERGY = 5;
 
     private static final int DEHYDRATIONLEVEL = 10;
 
-    private static final int HUNGRYLEVEL = 55;
+    private static final int HUNGRYLEVEL = 70;
 
-    private static final int LONGHUNGER = 20;
+    private static final int LONGHUNGER = 30;
 
-    private static final int SHORTLUNGER = 5;
+    private static final int SHORTLUNGER = 10;
     private static final int STARVINGLEVEL = 40;
 
     private static final int TIREDLEVEL = 25;
@@ -46,7 +46,7 @@ public class Pet {
         this.thirst = 80;
         this.isSitting = 0;
         this.energy = 40;
-        this.hunger = 50;
+        this.hunger = 60;
     }
 
     /** Hunger is on a scale from 0 to 100 */ // This is a "javadoc"

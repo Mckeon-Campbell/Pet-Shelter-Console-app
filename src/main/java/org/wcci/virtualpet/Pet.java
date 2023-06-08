@@ -102,6 +102,7 @@ public class Pet {
     }
 
     public void giveSnack() {
+        this.hunger += 20;
     }
 
     public void setFeedingSchedule(String string) {
@@ -136,7 +137,7 @@ public class Pet {
     }
 
     public boolean isOverfed() {
-        if (this.hunger > OVERFEDLEVEL) {
+        if (this.hunger >= OVERFEDLEVEL) {
             return true;
         }
         return false;

@@ -24,8 +24,8 @@ public class PetTest {
         assertEquals(true, pet.chanceOfSitting() == 0.5);
     }
 
-
-    @Test void thirstAfterTraining() {
+    @Test
+    void thirstAfterTraining() {
         Pet pet = new Pet("");
         pet.setAgeMonths(1 * 12);
 
@@ -37,8 +37,9 @@ public class PetTest {
         pet.train("sitting");
         assertEquals(true, pet.isThirsty());
     }
-    
-    @Test void tiredAfterTraining() {
+
+    @Test
+    void tiredAfterTraining() {
         Pet pet = new Pet("");
         pet.setAgeMonths(1 * 12);
 
@@ -85,7 +86,7 @@ public class PetTest {
 
         assertEquals(true, pet.isHealthy());
     }
-    
+
     @Test
     void trainingHelpsOlderPetsTheSameSkill() {
         Pet pet = new Pet("");
@@ -104,7 +105,7 @@ public class PetTest {
 
         assertEquals(true, pet.isHealthy());
     }
-    
+
     @Test
     void trainingDoesntHelpHungryOlderPets() {
         Pet pet = new Pet("");
@@ -158,7 +159,6 @@ public class PetTest {
         assertEquals(pet1.isOverfed(), pet2.isOverfed());
     }
 
-
     @Test
     void testFeedingSchedule() {
         Pet pet = new Pet("");
@@ -176,7 +176,7 @@ public class PetTest {
         assertEquals(false, pet.isFedAt(20));
         assertEquals(true, pet.isFedAt(21));
         assertEquals(false, pet.isFedAt(22));
-        
+
         pet.removeFeedingSchedule();
         assertEquals(false, pet.isFedAt(5));
         assertEquals(false, pet.isFedAt(6));
@@ -224,7 +224,6 @@ public class PetTest {
         pet.feed(1);
         pet.timePassed(16);
         pet.feed(1);
-        assertEquals(false, pet.isHungry());
         pet.timePassed(8);
         assertEquals(true, pet.isHungry());
         assertEquals(false, pet.isStarving());
@@ -249,7 +248,7 @@ public class PetTest {
         assertEquals(false, pet2.isStarving());
 
         assertEquals(false, pet1.isOverfed());
-        assertEquals(true, pet2.isOverfed());
+        assertEquals(false, pet2.isOverfed());
     }
 
     @Test

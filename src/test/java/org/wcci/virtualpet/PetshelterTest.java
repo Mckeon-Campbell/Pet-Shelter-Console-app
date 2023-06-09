@@ -3,7 +3,7 @@ package org.wcci.virtualpet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import org.wcci.virtualpet.Petshelter;
+
 
 public class PetshelterTest {
     @Test

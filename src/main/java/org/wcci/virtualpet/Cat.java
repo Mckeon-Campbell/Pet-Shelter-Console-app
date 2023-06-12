@@ -7,4 +7,7 @@ public class Cat extends Pet {
         super(name);
         this.isLitterboxDirty = false;
     }
+    public void cleanLitter(){
+        this.isLitterboxDirty = false;
+    }
 }

@@ -7,4 +7,7 @@ public class Dog extends Pet {
         super(name);
         this.isCageDirty = false;
     }
+    public void cleanCage(){
+        this.isCageDirty = false;
+    }
 }

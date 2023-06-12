@@ -1,8 +1,13 @@
 package org.wcci.virtualpet;
 
-public class Robotpet extends Petshelter {
+public class Robotpet  {
     public int oil = 80;
     public int mT = 80;
+    private String petName;
+
+    public Robotpet(String name) {
+        this.petName = name;
+    }
 
     public int getOil() {
         return this.oil;
@@ -32,4 +37,9 @@ public class Robotpet extends Petshelter {
             return false;
         }
     }
+    public void domT(int i){
+        this.oil+=20;
+        this.mT+=20;
+    }
+
 }

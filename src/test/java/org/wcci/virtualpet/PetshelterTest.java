@@ -27,4 +27,5 @@ public class PetshelterTest {
         petshelter.feedAll();
         assertEquals(false, lion.isHungry());
     }
+
 }

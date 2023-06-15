@@ -13,7 +13,7 @@ public class RobotpetTest {
         dog.walk();
         assertEquals(true, dog.needsOil());
         assertEquals(true, dog.needsmT());
-        dog.domT(1);
+        dog.mainT(1);
         assertEquals(false, dog.needsOil());
         assertEquals(false, dog.needsmT());
 

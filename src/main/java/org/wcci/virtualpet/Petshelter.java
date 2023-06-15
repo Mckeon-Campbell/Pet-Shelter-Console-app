@@ -48,9 +48,9 @@ public class Petshelter {
         }
     }
 
-    public void mTAll() {
+    public void mainTAll() {
         for (String key : robotpetshelter.keySet()) {
-            robotpetshelter.get(key).domT(1);
+            robotpetshelter.get(key).mainT(1);
         }
     }
 
@@ -72,5 +72,12 @@ public class Petshelter {
         }
         petshelter.shelterpetsList();
         petshelter.feedAll();
+    }
+
+    public Boolean containsRoboPet(String petName) {
+        if(robotpetshelter.containsKey(petName)){
+            return true;
+        }
+        return false;
     }
 }

@@ -37,7 +37,7 @@ public class Robotpet  {
             return false;
         }
     }
-    public void domT(int i){
+    public void mainT(int i){
         this.oil+=20;
         this.mT+=20;
     }

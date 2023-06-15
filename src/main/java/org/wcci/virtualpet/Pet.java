@@ -246,6 +246,7 @@ public class Pet {
     }
 
     public void walk() {
+        this.hunger -=10;
     }
 
     public void removeFeedingSchedule() {

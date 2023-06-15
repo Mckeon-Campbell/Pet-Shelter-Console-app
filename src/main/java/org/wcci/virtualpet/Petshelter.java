@@ -60,22 +60,15 @@ public class Petshelter {
         }
     }
 
-    public static void main(String[] args) {
-        Petshelter petshelter = new Petshelter();
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("What is the pet's name?");
-            String petName = scanner.next();
-            Pet pet = new Pet(petName);
-            petshelter.petAdd(petName, pet);
-            petshelter.petAdoption(petName);
-            petshelter.getPet(petName);
-        }
-        petshelter.shelterpetsList();
-        petshelter.feedAll();
-    }
-
     public Boolean containsRoboPet(String petName) {
         if(robotpetshelter.containsKey(petName)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean containsPet(String petName) {
+        if(petshelter.containsKey(petName)){
             return true;
         }
         return false;
